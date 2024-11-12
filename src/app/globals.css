@@ -1,0 +1,139 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .active-link-gray-900::after {
+    @apply absolute bottom-0 left-0 w-1/4 border-b-2 border-gray-900;
+    content: "";
+  }
+
+  .active-link-gray-0::after {
+    @apply absolute bottom-0 left-0 w-1/2 border-b-2 border-gray-0;
+    content: "";
+  }
+
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}
+
+@layer base {
+  :root {
+    --orange-50: #fef5ee;
+    --orange-100: #fde9d7;
+    --orange-200: #fbcead;
+    --orange-300: #f7ac7a;
+    --orange-400: #f38044;
+    --orange-500: #f06124;
+    --orange-600: #e14415;
+    --orange-700: #bb3113;
+    --orange-800: #942918;
+    --orange-900: #782416;
+
+    --blue-50: #f4f6fa;
+    --blue-100: #e5e8f4;
+    --blue-200: #d1d7ec;
+    --blue-300: #b2bdde;
+    --blue-400: #8d9bcd;
+    --blue-500: #5f66b1;
+    --blue-600: #5456a1;
+    --blue-700: #494984;
+    --blue-800: #3e3f6a;
+    --blue-900: #2f2f4c;
+
+    --gray-0: #ffffff;
+    --gray-100: #eeeef0;
+    --gray-200: #d8dadf;
+    --gray-300: #b6b9c3;
+    --gray-400: #8f93a1;
+    --gray-500: #717686;
+    --gray-600: #5b5f6e;
+    --gray-700: #4a4c5a;
+    --gray-800: #383942;
+    --gray-900: #25262c;
+  }
+}
+
+.is-display {
+  font-size: 80px;
+  line-height: 110%;
+  font-family: "Sora", sans-serif;
+}
+
+.is-h1 {
+  font-size: 60px;
+  line-height: 120%;
+  font-family: "Sora", sans-serif;
+}
+
+.is-h2 {
+  font-size: 48px;
+  line-height: 120%;
+  font-family: "Sora", sans-serif;
+}
+
+.is-h3 {
+  font-size: 39px;
+  line-height: 120%;
+  font-family: "Sora", sans-serif;
+}
+
+.is-h4 {
+  font-size: 31px;
+  line-height: 120%;
+  font-family: "Sora", sans-serif;
+}
+
+.is-h5 {
+  font-size: 25px;
+  line-height: 130%;
+  font-family: "Sora", sans-serif;
+}
+
+.is-h6 {
+  font-size: 20px;
+  line-height: 130%;
+  font-family: "Sora", sans-serif;
+}
+
+.is-xlarge {
+  font-size: 32px;
+  line-height: 140%;
+  font-family: "Inter", sans-serif;
+}
+
+.is-large {
+  font-size: 24px;
+  line-height: 160%;
+  font-family: "Inter", sans-serif;
+}
+
+.is-xmedium {
+  font-size: 18px;
+  line-height: 180%;
+  font-family: "Inter", sans-serif;
+}
+
+.is-medium {
+  font-size: 16px;
+  line-height: 160%;
+  font-family: "Inter", sans-serif;
+}
+
+.is-small {
+  font-size: 14.4px;
+  line-height: 160%;
+  font-family: "Inter", sans-serif;
+}
+
+.is-xsmall {
+  font-size: 11.2px;
+  line-height: 160%;
+  font-family: "Inter", sans-serif;
+}
