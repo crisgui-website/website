@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Carousel,
   CarouselContent,
@@ -9,7 +11,7 @@ import {
 import Image from "next/image";
 
 export function Gallery() {
-  const imageNumbers = Array.from({ length: 8 }, (_, i) => i + 1);
+  const imageNumbers = Array.from({ length: 9 }, (_, i) => i + 1);
 
   return (
     <div className="mt-8 sm:mt-32 bg-orange-400">
@@ -31,8 +33,14 @@ export function Gallery() {
                   src={`/images/carousel/img-${num}.svg`}
                   alt={`Imagem ${num}`}
                   layout="responsive"
-                  width={300}
-                  height={50}
+                  width={0}
+                  height={0}
+                  className="object-center max-h-[130px] sm:max-h-[500px]"
+                  onError={(e) => {
+                    const target = e.target as HTMLImageElement;
+                    target.onerror = null;
+                    target.src = `/images/carousel/img-${num}.jpeg`;
+                  }}
                 />
               </CarouselItem>
             ))}

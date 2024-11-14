@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SquareArrowOutUpRight } from "lucide-react";
-import aboutSVG from "../../../assets/about.svg";
+import aboutSVG from "../../../assets/about.jpeg";
 import aboutVectorSVG from "../../../assets/about-vector.svg";
 
 export function About() {

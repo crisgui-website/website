@@ -33,7 +33,7 @@ export function PeadCallToAction() {
 
   return (
     <div
-      className={`max-w-screen-xl sm:mx-auto rounded-2xl p-6 sm:p-16 sm:flex items-end sm:h-[312px] my-14 bg-no-repeat bg-cover bg-center ${backgrounds[currentBackground]}`}
+      className={`max-w-screen-xl mx-4 sm:mx-auto rounded-2xl p-6 sm:p-16 sm:flex items-end sm:h-[312px] my-14 bg-no-repeat bg-cover bg-center ${backgrounds[currentBackground]}`}
     >
       <div className="flex flex-col gap-6">
         <p className="is-xlarge font-medium text-gray-0">Rolete de PEAD</p>
