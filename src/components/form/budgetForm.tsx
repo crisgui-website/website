@@ -226,10 +226,9 @@ export function BudgetForm() {
             <div className="flex justify-center">
               <Button
                 className="w-full h-16 rounded-2xl bg-orange-500 text-gray-0 mt-8"
-                type="button"
-                onClick={() => router.push("/produtos")}
+                type="submit"
               >
-                Conheça Nossos Produtos
+                Enviar pedido de orçamento
               </Button>
             </div>
           </form>

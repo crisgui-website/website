@@ -19,9 +19,10 @@ export function Collaborators() {
       link: string;
     }
   > = {
+
     1: {
-      name: "Luciano Nogueira",
-      position: "Diretor Executivo",
+      name: "Cristiana Orzil",
+      position: "Diretora Comercial",
       link: "",
     },
     2: {
@@ -30,8 +31,8 @@ export function Collaborators() {
       link: "",
     },
     3: {
-      name: "Cristiana Orzil",
-      position: "Diretora Comercial",
+      name: "Luciano Nogueira",
+      position: "Diretor Executivo",
       link: "",
     },
   };

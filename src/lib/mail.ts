@@ -22,7 +22,7 @@ export async function sendMail({
 }: SendMailProps) {
   await resend.emails.send({
     from: `${type === "contact" ? "contato" : "orcamento"}@resend.dev`,
-    to: "crisguiwebsite@gmail.com",
+    to: "vendas@crisgui.com.br",
     subject:
       type === "contact"
         ? "Nova solicitação de contato"

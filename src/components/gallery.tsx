@@ -35,7 +35,7 @@ export function Gallery() {
                   layout="responsive"
                   width={0}
                   height={0}
-                  className="object-center max-h-[130px] sm:max-h-[500px]"
+                  className="object-center object-cover max-h-[130px] sm:max-h-[500px]"
                   onError={(e) => {
                     const target = e.target as HTMLImageElement;
                     target.onerror = null;
