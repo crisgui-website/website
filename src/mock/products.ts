@@ -23,6 +23,10 @@ export const products: Record<string, {
       id: 5,
       label: 'Roletes de Carga',
     },
+    {
+      id: 6,
+      label: 'Rolete de Guia'
+    }
   ],
   RETORNO: [
     {
@@ -136,6 +140,12 @@ export const products: Record<string, {
     {
       id: 3,
       label: 'Rolete de Carga com Adaptador',
+    }
+  ],
+  GUIA: [
+    {
+      id: 1,
+      label: 'Rolete de Guia'
     }
   ],
   TAMBORES: [

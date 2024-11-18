@@ -85,7 +85,13 @@ export function ProductList() {
 
   const selectedTypeProducts = products[selectedType.value] || [];
 
-  const handleTypeSelect = (type: ProductType) => setSelectedType(type);
+  const handleTypeSelect = (type: ProductType) => {
+    window.scrollTo({
+      top: 1000,
+      behavior: 'smooth'
+    });
+    setSelectedType(type)
+  };
 
   const handleProductSelect = (product: Product) => {
     setSelectedProduct(product);

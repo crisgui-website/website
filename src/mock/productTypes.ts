@@ -55,7 +55,7 @@ export const productTypeFilter: {
         {
           id: 7,
           parentType: 1,
-          label: 'Rolete Guia',
+          label: 'Rolete de Guia',
           value: ProductRoleteSubType.GUIA,
         },
       ]
