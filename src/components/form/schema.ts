@@ -14,22 +14,20 @@ export const schemaContact = z.object({
     .string({
       message: "Telefone é obrigatório",
     })
-  // .refine(
-  //   (value) => {
-  //     if (value) {
-  //       console.log(value);
-  //       if (value.length < 14) {
-  //         return landlineTelephoneRegex.test(value);
-  //       }
-  //       return phoneRegex.test(value);
-  //     }
-  //     return false;
-  //   },
-  //   {
-  //     message: "Informe um telefone válido",
-  //   }
-  // )
-  ,
+    .refine(
+      (value) => {
+        if (value) {
+          if (value.length < 14) {
+            return landlineTelephoneRegex.test(value);
+          }
+          return phoneRegex.test(value);
+        }
+        return false;
+      },
+      {
+        message: "Informe um telefone válido",
+      }
+    ),
   message: z.string().optional(),
 });
 
@@ -62,11 +60,9 @@ export const schemaBudget = z.object({
     ),
   product: z.enum(
     [
-      "ROLETE",
-      "ROLOS_DE_CARGA",
-      "CABECEIRAS",
+      "ROLETES",
       "TAMBORES",
-      "LIMPADORES_ESTICADORES",
+      "SUPORTES",
     ],
     {
       message: "Produto é obrigatório",

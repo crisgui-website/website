@@ -7,8 +7,6 @@ import Image from "next/image";
 
 import FormSVG from "../../assets/form.svg";
 
-import { sendContact } from "./actions";
-
 import { schemaContact } from "./schema";
 
 import { FormControl, FormField, FormItem, FormLabel, FormMessage, Form } from '@/components/ui/form'
@@ -24,7 +22,15 @@ export function ContactForm() {
   })
 
   const handleSubmit = async (data: z.infer<typeof schemaContact>) => {
-    await sendContact(data);
+    await fetch('/api/contact', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    form.reset();
   };
 
   return (

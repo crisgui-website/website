@@ -2,17 +2,11 @@
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-
+import { useState } from "react";
 import Image from "next/image";
-
 import FormSVG from "../../assets/form.svg";
-
-import { sendBudget } from "./actions";
-
 import { schemaBudget } from "./schema";
-
 import { productOptions } from "@/mock/productTypes";
-
 import {
   FormControl,
   FormField,
@@ -35,16 +29,22 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import masks from "@/utils/inputMask";
-import { useRouter } from "next/navigation";
 
 export function BudgetForm() {
-  const router = useRouter();
   const form = useForm<z.infer<typeof schemaBudget>>({
     resolver: zodResolver(schemaBudget),
   });
 
   const handleSubmit = async (data: z.infer<typeof schemaBudget>) => {
-    await sendBudget(data);
+    await fetch('/api/budget', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+
+    form.reset();
   };
 
   return (
