@@ -5,6 +5,9 @@ export const schemaContact = z.object({
   name: z.string({
     message: "Nome é obrigatório",
   }),
+  company: z.string({
+    message: "Nome da empresa é obrigatório",
+  }),
   email: z
     .string({
       message: "E-mail é obrigatório",
@@ -34,6 +37,9 @@ export const schemaContact = z.object({
 export const schemaBudget = z.object({
   name: z.string({
     message: "Nome é obrigatório",
+  }),
+  company: z.string({
+    message: "Nome da empresa é obrigatório",
   }),
   email: z
     .string({
@@ -68,11 +74,6 @@ export const schemaBudget = z.object({
       message: "Produto é obrigatório",
     }
   ),
-  term: z
-    .number({ message: "Prazo é obrigatório" })
-    .int("Prazo deve ser um número inteiro")
-    .positive("Prazo deve ser um número positivo")
-    .multipleOf(5, "O prazo deve ser de 5 em 5 dias"),
   city_state: z.string({
     message: "Cidade/Estado é obrigatório",
   }),

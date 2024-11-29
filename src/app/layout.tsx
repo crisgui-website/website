@@ -6,6 +6,7 @@ import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
 
 import { Sora, Inter } from "next/font/google";
+import { Toaster } from "sonner";
 
 const sora = Sora({
   subsets: ["latin"],
@@ -35,6 +36,11 @@ export default function RootLayout({
         <Header />
         {children}
         <Footer />
+        <Toaster
+          position="top-right"
+          closeButton
+          richColors
+        />
       </body>
     </html>
   );

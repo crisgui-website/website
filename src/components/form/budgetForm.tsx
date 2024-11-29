@@ -2,7 +2,6 @@
 import { useForm } from "react-hook-form";
 import * as z from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useState } from "react";
 import Image from "next/image";
 import FormSVG from "../../assets/form.svg";
 import { schemaBudget } from "./schema";
@@ -29,6 +28,8 @@ import {
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import masks from "@/utils/inputMask";
+import { toast } from "sonner";
+import { env } from "@/utils/env";
 
 export function BudgetForm() {
   const form = useForm<z.infer<typeof schemaBudget>>({
@@ -36,15 +37,46 @@ export function BudgetForm() {
   });
 
   const handleSubmit = async (data: z.infer<typeof schemaBudget>) => {
-    await fetch('/api/budget', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    });
+    const { name, company, city_state, email, phone, product, message } = data;
 
-    form.reset();
+    try {
+      const loadingToast = toast.loading('Enviando mensagem...');
+
+      const response = await fetch(
+        env.lambdaUrl || '',
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            mailData: { name, company, email, phone, city_state, message, product },
+            type: 'budget',
+          }),
+        }
+      );
+
+      if (!response.ok) {
+        throw new Error('Erro na requisição');
+      }
+
+      await response.json();
+
+      toast.dismiss(loadingToast);
+      toast.success('Mensagem enviada com sucesso!');
+      form.reset({
+        name: '',
+        company: '',
+        email: '',
+        phone: '',
+        message: '',
+        city_state: '',
+        product: 'ROLETES',
+      });
+    } catch (error) {
+      toast.dismiss();
+      toast.error('Erro ao enviar mensagem. Tente novamente.');
+    }
   };
 
   return (
@@ -76,6 +108,28 @@ export function BudgetForm() {
 
               <FormField
                 control={form.control}
+                name="company"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col items-start space-y-1 mb-4 w-full">
+                    <FormLabel className=" text-gray-900 font-medium">
+                      Empresa
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Empresa X"
+                        {...field}
+                        className="bg-gray-0 border-[1px] border-gray-10 text-gray-900 ring-0 focus-visible:ring-offset-0 focus-visible:ring-0"
+                      />
+                    </FormControl>
+                    <FormMessage className="mt-1 text-sm text-orange-700" />
+                  </FormItem>
+                )}
+              />
+            </InputsWrapper>
+
+            <InputsWrapper>
+              <FormField
+                control={form.control}
                 name="email"
                 render={({ field }) => (
                   <FormItem className="flex flex-col items-start space-y-1 mb-4 w-full">
@@ -94,9 +148,7 @@ export function BudgetForm() {
                   </FormItem>
                 )}
               />
-            </InputsWrapper>
 
-            <InputsWrapper>
               <FormField
                 control={form.control}
                 name="phone"
@@ -115,6 +167,28 @@ export function BudgetForm() {
                             masks["phoneAndLandlineTelephone"].maskEvent(e);
                           field.onChange(value);
                         }}
+                      />
+                    </FormControl>
+                    <FormMessage className="mt-1 text-sm text-orange-700" />
+                  </FormItem>
+                )}
+              />
+            </InputsWrapper>
+
+            <InputsWrapper>
+              <FormField
+                control={form.control}
+                name="city_state"
+                render={({ field }) => (
+                  <FormItem className="flex flex-col items-start space-y-1 mb-4 w-full">
+                    <FormLabel className=" text-gray-900 font-medium">
+                      Cidade/Estado
+                    </FormLabel>
+                    <FormControl>
+                      <Input
+                        placeholder="Cidade/Estado"
+                        {...field}
+                        className="bg-gray-0 border-[1px] border-gray-10 text-gray-900 ring-0 focus-visible:ring-offset-0 focus-visible:ring-0"
                       />
                     </FormControl>
                     <FormMessage className="mt-1 text-sm text-orange-700" />
@@ -149,53 +223,6 @@ export function BudgetForm() {
                           </SelectGroup>
                         </SelectContent>
                       </Select>
-                    </FormControl>
-                    <FormMessage className="mt-1 text-sm text-orange-700" />
-                  </FormItem>
-                )}
-              />
-            </InputsWrapper>
-
-            <InputsWrapper>
-              <FormField
-                control={form.control}
-                name="term"
-                render={({ field }) => (
-                  <FormItem className="flex flex-col items-start space-y-1 mb-4 w-full">
-                    <FormLabel className=" text-gray-900 font-medium">
-                      Prazo em dias
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        type="number"
-                        placeholder="5"
-                        {...field}
-                        className="bg-gray-0 border-[1px] border-gray-10 text-gray-900 ring-0 focus-visible:ring-offset-0 focus-visible:ring-0"
-                        onChange={(e) => {
-                          const value = parseInt(e.target.value, 10);
-                          field.onChange(value);
-                        }}
-                      />
-                    </FormControl>
-                    <FormMessage className="mt-1 text-sm text-orange-700" />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="city_state"
-                render={({ field }) => (
-                  <FormItem className="flex flex-col items-start space-y-1 mb-4 w-full">
-                    <FormLabel className=" text-gray-900 font-medium">
-                      Cidade/Estado
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        placeholder="Exemplo/Exemplo"
-                        {...field}
-                        className="bg-gray-0 border-[1px] border-gray-10 text-gray-900 ring-0 focus-visible:ring-offset-0 focus-visible:ring-0"
-                      />
                     </FormControl>
                     <FormMessage className="mt-1 text-sm text-orange-700" />
                   </FormItem>
